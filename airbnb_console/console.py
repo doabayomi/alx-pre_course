@@ -14,6 +14,9 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    __valid_classes = {
+        "BaseModel", "User"
+    }
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -36,7 +39,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(arg) == 0:
             print("** class name missing **")
-        elif arg != "BaseModel":
+        elif arg not in HBNBCommand.__valid_classes:
             print("** class doesn't exist **")
         else:
             new_model = eval(arg)()
@@ -54,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
         object_list = storage.all()
         if len(arg) == 0:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in HBNBCommand.__valid_classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -74,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         object_list = storage.all()
         if len(arg) == 0:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif args[0] not in HBNBCommand.__valid_classes:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
@@ -93,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
         final_list = list()
         object_list = storage.all()
         if (len(arg) > 0):
-            if (arg != "BaseModel"):
+            if (arg not in HBNBCommand.__valid_classes):
                 print("** class doesn't exist **")
         else:
             for instance in object_list.values():
@@ -115,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return False
-        elif args[0] != "BaseModel":
+        elif args[0] not in HBNBCommand.__valid_classes:
             print("** class doesn't exist **")
             return False
         elif len(args) == 1:
